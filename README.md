@@ -14,7 +14,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 * Either run
 
 ```
-php composer.phar require "himiklab/yii2-rss-writer-module" "*"
+php composer.phar require --prefer-dist "himiklab/yii2-rss-writer-module" "*"
 ```
 or add
 
@@ -43,47 +43,41 @@ CREATE TABLE `rss_feed` (
 
 ```php
 'components' => [
-    ...
     'cache' => [
         'class' => 'yii\caching\FileCache',
     ],
-    ...
 ]
 ```
 
-* Add a new module in `modules` section of your application's configuration file.
+* Add a new module in `modules` section of your application's configuration file, for example:
 
 ```php
 'modules' => [
-    ...
     'rss' => [
         'class' => 'himiklab\rss\Rss',
         'feeds' => [
-            'rss.xml' => [
-                'title' => 'feed title',
+            'rss' => [
+                'title' => 'Feed title',
                 'description' => 'feed description',
                 'link' => 'http://your.site.com/',
                 'language' => 'en-US'
             ],
         ]
     ],
-    ...
 ],
 ```
 
-* Add a new rule for `urlManager` of your application's configuration file.
+* Add a new rule for `urlManager` of your application's configuration file, for example:
 
 ```php
 'urlManager' => [
     'rules' => [
-        '/<id:rss.xml>' => 'rss/default/index',
-        ...
+        ['pattern' => '<id:rss>', 'route' => 'rss/default/index', 'suffix' => '.xml'],
     ],
-    ...
 ],
 ```
 
-* Add a new `<link>` tag to your `<head>` tag.
+* Add a new `<link>` tag to your `<head>` tag, for example:
 
 ```html
 <link rel="alternate" type="application/rss+xml" title="RSS feed" href="/rss.xml" />
@@ -107,7 +101,7 @@ public function beforeSave($insert)
             $rssItem->link = Url::to($this->url, true);
             $rssItem->pubDate = time();
 
-            return $rss->addItemToFeed('rss.xml', $rssItem);
+            return $rss->addItemToFeed('rss', $rssItem);
         }
         return true;
     }
@@ -119,6 +113,6 @@ public function afterDelete()
     parent::afterDelete();
     $rss = Yii::$app->getModule('rss');
     
-    $rss->deleteItems('rss.xml', ['link' => Url::to($this->url, true)]);
+    $rss->deleteItems('rss', ['link' => Url::to($this->url, true)]);
 }
 ```
