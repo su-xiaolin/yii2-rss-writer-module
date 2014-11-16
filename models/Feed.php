@@ -29,7 +29,7 @@ class Feed extends ActiveRecord
 
     public static function tableName()
     {
-        return '{{%_rss_feed}}';
+        return '{{%rss_feed}}';
     }
 
     public function init()

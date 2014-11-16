@@ -24,20 +24,7 @@ or add
 
 to the require section of your application's `composer.json` file.
 
-* Add a new table to your database.
-
-```sql
-CREATE TABLE `rss_feed` (
-    `id` mediumint(9) NOT NULL,
-    `feed_id` varchar(40) NOT NULL,
-    `title` varchar(255) NOT NULL,
-    `description` text NOT NULL,
-    `link` varchar(255) NOT NULL,
-    `content` mediumtext NOT NULL,
-    `author` varchar(255) NOT NULL DEFAULT '',
-    `pubDate` varchar(40) NOT NULL DEFAULT ''
-);
-```
+* Apply all available migrations in `migrations` folder.
 
 * Configure the `cache` component of your application's configuration file, for example:
 
