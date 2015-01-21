@@ -24,7 +24,11 @@ or add
 
 to the require section of your application's `composer.json` file.
 
-* Apply all available migrations in `migrations` folder.
+* Apply all available migrations in `migrations` folder:
+
+```shell
+$ php yii migrate/up --migrationPath=@vendor/himiklab/yii2-rss-writer-module/migrations
+```
 
 * Configure the `cache` component of your application's configuration file, for example:
 
