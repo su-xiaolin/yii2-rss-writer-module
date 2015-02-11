@@ -10,7 +10,7 @@ namespace himiklab\rss;
 use Yii;
 use yii\base\Module;
 use yii\base\InvalidConfigException;
-use himiklab\rss\Models\Feed;
+use himiklab\rss\models\Feed;
 
 /**
  * Yii2 module for automatically generation RSS 2.0 feeds.
