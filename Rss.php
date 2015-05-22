@@ -106,4 +106,15 @@ class Rss extends Module
             return false;
         }
     }
+
+    /** 
+     * the specified feed is exists.
+     * @param string $feedId
+     * @param string $link
+     * @return boolean False if the feed is exists.
+     */
+    public function itemExists($feedId, $link)
+    {
+        return Feed::find()->where(['feed_id' => $feedId, 'link' => $link])->exists();
+    }
 }
