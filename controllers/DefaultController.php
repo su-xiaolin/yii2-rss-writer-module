@@ -9,6 +9,7 @@ namespace himiklab\rss\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\web\NotFoundHttpException;
 use himiklab\rss\models\Feed;
 
@@ -22,7 +23,7 @@ class DefaultController extends Controller
             throw new NotFoundHttpException("RSS feed not found.");
         }
 
-        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        Yii::$app->response->format = Response::FORMAT_RAW;
         Yii::$app->response->headers->add('Content-Type', 'text/xml');
         if ($view = Yii::$app->cache->get("{$module->cacheKeyPrefix}-{$id}")) {
             echo $view;
