@@ -22,7 +22,8 @@ class DefaultController extends Controller
             throw new NotFoundHttpException("RSS feed not found.");
         }
 
-        header('Content-type: application/xml');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        Yii::$app->response->headers->add('Content-Type', 'text/xml');
         if ($view = Yii::$app->cache->get("{$module->cacheKeyPrefix}-{$id}")) {
             echo $view;
             return;
